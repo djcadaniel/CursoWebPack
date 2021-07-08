@@ -1,5 +1,5 @@
 {
-    "presets": [
+    "presets": [//preset- para trabajar con js moderno
         "@babel/preset-env"
     ],
     "plugins":[

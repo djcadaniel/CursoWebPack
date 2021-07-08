@@ -15,9 +15,9 @@ module.exports = {
     },
     //para trabajar con babel-loader
     module:{
-        rules: [
+        rules: [ //reglas
             {
-                test: /\.m?js$/,
+                test: /\.m?js$/, //extensiones con la que voy a trabajar
                 exclude: /node_modules/,
                 use:{
                     loader: 'babel-loader'
