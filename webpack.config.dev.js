@@ -2,10 +2,7 @@ const path = require('path')  //ya esta disponible en node, no es necesario inst
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 //el modulo tendtra un objeto
 module.exports = {
@@ -15,6 +12,8 @@ module.exports = {
         filename: '[name].[contenthash].js',//para que me muestre cual fue el has de este build
         assetModuleFilename: 'assets/images/[hash][ext][query]' //moviendo nuestras imagenes a dist
     },
+    mode: 'development',
+    watch:true,
     //extensiones con lo que vamos a trabajar
     resolve: {
         extensions: ['.js'],
@@ -79,14 +78,6 @@ module.exports = {
                 }
             ]
         }),
-        new Dotenv(),//configuracion de variables de entorno
-        new CleanWebpackPlugin()
+        new Dotenv() //configuracion de variables de entorno
     ],
-    optimization:{
-        minimize: true,
-        minimizer:[
-            new CssMinimizerPlugin(),
-            new TerserPlugin()
-        ]
-    }
 }
