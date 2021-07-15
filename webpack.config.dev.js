@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
 //el modulo tendtra un objeto
 module.exports = {
@@ -13,7 +14,8 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]' //moviendo nuestras imagenes a dist
     },
     mode: 'development',
-    watch:true,
+    devtool: 'source-map',//se generara un json
+    // watch:true,
     //extensiones con lo que vamos a trabajar
     resolve: {
         extensions: ['.js'],
@@ -78,6 +80,15 @@ module.exports = {
                 }
             ]
         }),
-        new Dotenv() //configuracion de variables de entorno
+        new Dotenv(), //configuracion de variables de entorno
+        new BundleAnalyzerPlugin(),
     ],
+    //para tener un servidor local
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        historyApiFallback: true, //tener un historial
+        port: 3006,
+        open: true //abrir el navegador automaticamente
+    }
 }
